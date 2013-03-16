@@ -1,4 +1,4 @@
-holydays
+holidays
 ========
 
 Share your holidays knowledge
