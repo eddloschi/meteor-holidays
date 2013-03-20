@@ -7,5 +7,6 @@
         "mocha": "*"
       , "chai": "*"
       , "zombie": "*"
+      , "coffee-script": "*"
     }
 }
