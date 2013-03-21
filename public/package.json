@@ -5,6 +5,5 @@
   ,
     "dependencies": {
         "later": "*"
-      , "moment": "*"
     }
 }

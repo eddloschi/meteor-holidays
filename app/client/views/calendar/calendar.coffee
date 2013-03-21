@@ -1,3 +1,9 @@
+Template.calendar.currentMonthName = ->
+  moment(Session.get('currentDate')).format('MMM')
+
+Template.calendar.currentYear = ->
+  moment(Session.get('currentDate')).format('YYYY')
+
 # Template.calendar.currentMonthName = ->
 #   i18n.ptBr.monthShorts[Session.get('currentMonth')]
 
