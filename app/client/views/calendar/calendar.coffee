@@ -4,6 +4,10 @@ Template.calendar.currentMonthName = ->
 Template.calendar.currentYear = ->
   moment(Session.get('currentDate')).format('YYYY')
 
+Template.calendar.events
+  'click #increase' : (e,t) ->
+      Session.set('currentDate', moment(Session.get('currentDate')).add('months', 1).format('YYYY-MM-DD'))
+
 # Template.calendar.currentMonthName = ->
 #   i18n.ptBr.monthShorts[Session.get('currentMonth')]
 
