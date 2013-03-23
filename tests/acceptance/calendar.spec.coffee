@@ -12,7 +12,6 @@ describe 'calendar view', ->
 
   it 'should have a calendar', ->
     should.exist @browser.query('#calendar-id')
-    @browser.evaluate('$("#month-view td").length').should.equal(42)
 
   it 'should show the present year and month on startup', ->
     presentMonth = @browser.evaluate('moment().format("MMM")')
@@ -22,12 +21,13 @@ describe 'calendar view', ->
 
   it 'should show days of month', ->
     currentDate = @browser.evaluate('Session.get("currentDate")')
-    @browser.evaluate("var startOfMonth = moment('#{currentDate}').startOf('month')")
-    @browser.evaluate('var lastSunday = startOfMonth.subtract("days", startOfMonth.day())')
-    for row in [0..5]
+    @browser.evaluate("var currentDay = moment('#{currentDate}').startOf('month')")
+    rows = @browser.evaluate('(currentDay.day() + moment(currentDay).endOf("month").date() <= 35) ? 4 : 5')
+    @browser.evaluate('currentDay.subtract("days", currentDay.day())')
+    for row in [0..rows]
       for col in [0..6]
-        @browser.text("##{row}-#{col}").should.equal("#{@browser.evaluate('lastSunday.date()')}")
-        @browser.evaluate('lastSunday.add("days", 1)')
+        @browser.text("##{row}-#{col}").should.equal("#{@browser.evaluate('currentDay.date()')}")
+        @browser.evaluate('currentDay.add("days", 1)')
 
 
   describe 'user interaction', =>
