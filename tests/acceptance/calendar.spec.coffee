@@ -20,8 +20,7 @@ describe 'calendar view', ->
     @browser.text('#year-id').should.equal(presentYear)
 
   it 'should show days of month', ->
-    currentDate = @browser.evaluate('Session.get("currentDate")')
-    @browser.evaluate("var currentDay = moment('#{currentDate}').startOf('month')")
+    @browser.evaluate('var currentDay = moment(Session.get("currentDate")).startOf("month")')
     rows = @browser.evaluate('(currentDay.day() + moment(currentDay).endOf("month").date() <= 35) ? 4 : 5')
     @browser.evaluate('currentDay.subtract("days", currentDay.day())')
     for row in [0..rows]
