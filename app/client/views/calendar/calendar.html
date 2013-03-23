@@ -11,66 +11,19 @@
         <th id="increase" class="month-switcher">></th>
       </tr>
       <tr class="days-week">
-
-        <th></th>
-
+        {{#each weekDays}}
+        <th>{{this}}</th>
+        {{/each}}
       </tr>
     </thead>
     <tbody>
+      {{#each monthDays}}
       <tr>
-        <td date="2013-03-15" class="month-day"></td>
-        <td date="2013-03-15" class="month-day"></td>
-        <td date="2013-03-15" class="month-day"></td>
-        <td date="2013-03-15" class="month-day"></td>
-        <td date="2013-03-15" class="month-day"></td>
-        <td date="2013-03-15" class="month-day"></td>
-        <td date="2013-03-15" class="month-day"></td>
+        {{#each days}}
+        <td id={{id}}>{{day}}</td>
+        {{/each}}
       </tr>
-      <tr>
-        <td date="2013-03-15" class="month-day"></td>
-        <td date="2013-03-15" class="month-day"></td>
-        <td date="2013-03-15" class="month-day"></td>
-        <td date="2013-03-15" class="month-day"></td>
-        <td date="2013-03-15" class="month-day"></td>
-        <td date="2013-03-15" class="month-day"></td>
-        <td date="2013-03-15" class="month-day"></td>
-      </tr>
-      <tr>
-        <td date="2013-03-15" class="month-day"></td>
-        <td date="2013-03-15" class="month-day"></td>
-        <td date="2013-03-15" class="month-day"></td>
-        <td date="2013-03-15" class="month-day"></td>
-        <td date="2013-03-15" class="month-day"></td>
-        <td date="2013-03-15" class="month-day"></td>
-        <td date="2013-03-15" class="month-day"></td>
-      </tr>
-      <tr>
-        <td date="2013-03-15" class="month-day"></td>
-        <td date="2013-03-15" class="month-day"></td>
-        <td date="2013-03-15" class="month-day"></td>
-        <td date="2013-03-15" class="month-day"></td>
-        <td date="2013-03-15" class="month-day"></td>
-        <td date="2013-03-15" class="month-day"></td>
-        <td date="2013-03-15" class="month-day"></td>
-      </tr>
-      <tr>
-        <td date="2013-03-15" class="month-day"></td>
-        <td date="2013-03-15" class="month-day"></td>
-        <td date="2013-03-15" class="month-day"></td>
-        <td date="2013-03-15" class="month-day"></td>
-        <td date="2013-03-15" class="month-day"></td>
-        <td date="2013-03-15" class="month-day"></td>
-        <td date="2013-03-15" class="month-day"></td>
-      </tr>
-      <tr>
-        <td date="2013-03-15" class="month-day"></td>
-        <td date="2013-03-15" class="month-day"></td>
-        <td date="2013-03-15" class="month-day"></td>
-        <td date="2013-03-15" class="month-day"></td>
-        <td date="2013-03-15" class="month-day"></td>
-        <td date="2013-03-15" class="month-day"></td>
-        <td date="2013-03-15" class="month-day"></td>
-      </tr>
+      {{/each}}
     </tbody>
   </table>
   </div>

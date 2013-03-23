@@ -4,6 +4,23 @@ Template.calendar.currentMonthName = ->
 Template.calendar.currentYear = ->
   moment(Session.get('currentDate')).format('YYYY')
 
+Template.calendar.weekDays = ->
+	moment()._lang._weekdays
+
+Template.calendar.monthDays = ->
+	startOfMonth = moment(Session.get('currentDate')).startOf('month')
+	currentDay = startOfMonth.subtract('days', startOfMonth.day())
+	days = []
+	for row in [0..5]
+		days[row] =
+			'days': []
+		for col in [0..6]
+			days[row].days[col] =
+				'day': moment(currentDay).date(),
+				'id': "#{row}-#{col}"
+			currentDay.add('days', 1)
+	days
+
 Template.calendar.events
   'click #increase' : (e,t) ->
       Session.set('currentDate', moment(Session.get('currentDate')).add('months', 1).format('YYYY-MM-DD'))

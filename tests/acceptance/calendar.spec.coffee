@@ -20,6 +20,16 @@ describe 'calendar view', ->
     presentYear = @browser.evaluate('moment().format("YYYY")')
     @browser.text('#year-id').should.equal(presentYear)
 
+  it 'should show days of month', ->
+    currentDate = @browser.evaluate('Session.get("currentDate")')
+    @browser.evaluate("var startOfMonth = moment('#{currentDate}').startOf('month')")
+    @browser.evaluate('var lastSunday = startOfMonth.subtract("days", startOfMonth.day())')
+    for row in [0..5]
+      for col in [0..6]
+        @browser.text("##{row}-#{col}").should.equal("#{@browser.evaluate('lastSunday.date()')}")
+        @browser.evaluate('lastSunday.add("days", 1)')
+
+
   describe 'user interaction', =>
 
     beforeEach ->
