@@ -30,3 +30,9 @@ describe 'calendar view', ->
       @browser.fire 'click', element, =>
         increasedMonth = @browser.evaluate("moment('#{@currentDate}').add('months', 1).format('MMM')")
         @browser.text('#month-id').should.equal(increasedMonth)
+
+    it 'should decrease month when the decrease button clicked', ->
+      element = @browser.query('#decrease')
+      @browser.fire 'click', element, =>
+        decreasedMonth = @browser.evaluate("moment('#{@currentDate}').subtract('months', 1).format('MMM')")
+        @browser.text('#month-id').should.equal(decreasedMonth)
