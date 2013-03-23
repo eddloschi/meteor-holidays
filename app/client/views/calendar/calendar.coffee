@@ -8,8 +8,8 @@ Template.calendar.weekDays = ->
 	moment()._lang._weekdays
 
 Template.calendar.monthDays = ->
-	startOfMonth = moment(Session.get('currentDate')).startOf('month')
-	currentDay = startOfMonth.subtract('days', startOfMonth.day())
+	currentDay = moment(Session.get('currentDate')).startOf('month')
+	currentDay.subtract('days', currentDay.day())
 	days = []
 	for row in [0..5]
 		days[row] =
