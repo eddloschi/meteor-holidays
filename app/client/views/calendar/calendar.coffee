@@ -1,17 +1,17 @@
 Template.calendar.currentMonthName = ->
-  moment(Session.get('currentDate')).format('MMM')
+  moment(Session.get 'currentDate').format 'MMM'
 
 Template.calendar.currentYear = ->
-  moment(Session.get('currentDate')).format('YYYY')
+  moment(Session.get 'currentDate').format 'YYYY'
 
 Template.calendar.weekDays = ->
   moment()._lang._weekdays
 
 Template.calendar.monthDays = ->
-  currentDay = moment(Session.get('currentDate')).startOf('month')
+  currentDay = moment(Session.get 'currentDate').startOf 'month'
   currentMonth = currentDay.month()
   rows = if currentDay.day() + moment(currentDay).endOf('month').date() <= 35 then 4 else 5
-  currentDay.subtract('days', currentDay.day())
+  currentDay.subtract 'days', currentDay.day()
   days = []
   for row in [0..rows]
     days[row] =
@@ -22,15 +22,15 @@ Template.calendar.monthDays = ->
         'id': "#{row}-#{col}"
         'class': if currentMonth is currentDay.month() then 'enabled' else 'disabled'
 
-      currentDay.add('days', 1)
+      currentDay.add 'days', 1
   days
 
 Template.calendar.events
-  'click #increase' : (e,t) ->
-      Session.set('currentDate', moment(Session.get('currentDate')).add('months', 1).format('YYYY-MM-DD'))
+  'click #increase' : (e, t) ->
+      Session.set 'currentDate', moment(Session.get 'currentDate').add('months', 1).format 'YYYY-MM-DD'
 
-  'click #decrease' : (e,t) ->
-      Session.set('currentDate', moment(Session.get('currentDate')).subtract('months', 1).format('YYYY-MM-DD'))
+  'click #decrease' : (e, t) ->
+      Session.set 'currentDate', moment(Session.get 'currentDate').subtract('months', 1).format 'YYYY-MM-DD'
 
 # Template.calendar.currentMonthName = ->
 #   i18n.ptBr.monthShorts[Session.get('currentMonth')]

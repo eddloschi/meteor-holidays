@@ -8,48 +8,48 @@ describe 'calendar view', ->
     @browser.visit('http://localhost:3000/').then done, done
 
   it 'should return 200 ok', ->
-    @browser.success.should.equal(true)
+    @browser.success.should.equal true
 
   it 'should have a calendar-id div', ->
-    should.exist @browser.query('#calendar-id')
+    should.exist @browser.query '#calendar-id'
 
   it 'should show the present year and month on startup', ->
-    presentMonth = @browser.evaluate('moment().format("MMM")')
-    @browser.text('#month-id').should.equal(presentMonth)
-    presentYear = @browser.evaluate('moment().format("YYYY")')
-    @browser.text('#year-id').should.equal(presentYear)
+    presentMonth = @browser.evaluate 'moment().format("MMM")'
+    @browser.text('#month-id').should.equal presentMonth
+    presentYear = @browser.evaluate 'moment().format("YYYY")'
+    @browser.text('#year-id').should.equal presentYear
 
   it 'should show days of the current selected month and have enabled or disabled css class ', ->
-    @browser.evaluate('var currentDay = moment(Session.get("currentDate")).startOf("month")')
-    currentMonth = @browser.evaluate("currentDay.month()")
-    rows = @browser.evaluate('(currentDay.day() + moment(currentDay).endOf("month").date() <= 35) ? 4 : 5')
-    @browser.evaluate('currentDay.subtract("days", currentDay.day())')
+    @browser.evaluate 'var currentDay = moment(Session.get("currentDate")).startOf("month")'
+    currentMonth = @browser.evaluate "currentDay.month()"
+    rows = @browser.evaluate '(currentDay.day() + moment(currentDay).endOf("month").date() <= 35) ? 4 : 5'
+    @browser.evaluate 'currentDay.subtract("days", currentDay.day())'
     for row in [0..rows]
       for col in [0..6]
-        @browser.text("##{row}-#{col}").should.equal("#{@browser.evaluate('currentDay.date()')}")
+        @browser.text("##{row}-#{col}").should.equal "#{@browser.evaluate('currentDay.date()')}"
 
-        if currentMonth is @browser.evaluate('currentDay.month()')
-          @browser.evaluate("$('##{row}-#{col}').hasClass('enabled')").should.equal(true)
-          @browser.evaluate("$('##{row}-#{col}').hasClass('disabled')").should.equal(false)
+        if currentMonth is @browser.evaluate 'currentDay.month()'
+          @browser.evaluate("$('##{row}-#{col}').hasClass('enabled')").should.equal true
+          @browser.evaluate("$('##{row}-#{col}').hasClass('disabled')").should.equal false
         else
-          @browser.evaluate("$('##{row}-#{col}').hasClass('disabled')").should.equal(true)
-          @browser.evaluate("$('##{row}-#{col}').hasClass('enabled')").should.equal(false)
+          @browser.evaluate("$('##{row}-#{col}').hasClass('disabled')").should.equal true
+          @browser.evaluate("$('##{row}-#{col}').hasClass('enabled')").should.equal false
 
-        @browser.evaluate('currentDay.add("days", 1)')
+        @browser.evaluate 'currentDay.add("days", 1)'
 
   describe 'user interaction', =>
 
     beforeEach ->
-      @currentDate = @browser.evaluate('Session.get("currentDate")')
+      @currentDate = @browser.evaluate 'Session.get("currentDate")'
 
     it 'should increase month when the increase button clicked', ->
-      element = @browser.query('#increase')
+      element = @browser.query '#increase'
       @browser.fire 'click', element, =>
-        increasedMonth = @browser.evaluate("moment('#{@currentDate}').add('months', 1).format('MMM')")
-        @browser.text('#month-id').should.equal(increasedMonth)
+        increasedMonth = @browser.evaluate "moment('#{@currentDate}').add('months', 1).format('MMM')"
+        @browser.text('#month-id').should.equal increasedMonth
 
     it 'should decrease month when the decrease button clicked', ->
-      element = @browser.query('#decrease')
+      element = @browser.query '#decrease'
       @browser.fire 'click', element, =>
-        decreasedMonth = @browser.evaluate("moment('#{@currentDate}').subtract('months', 1).format('MMM')")
-        @browser.text('#month-id').should.equal(decreasedMonth)
+        decreasedMonth = @browser.evaluate "moment('#{@currentDate}').subtract('months', 1).format('MMM')"
+        @browser.text('#month-id').should.equal decreasedMonth
