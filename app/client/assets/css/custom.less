@@ -1,0 +1,63 @@
+@cell-dimension: 80px;
+@simple-border: 1px solid #ddd;
+@th-color: #666;
+@shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6);
+
+.content {
+  font-family: Ubuntu, Arial, sans-serif;
+  margin-top: 2.3em;
+}
+
+#month-view {
+  th {
+    text-align: center;
+  }
+  .month-title {
+    border: none;
+    margin-bottom: 10px;
+
+    th {
+      background-color: whiteSmoke;
+      border: none;
+      height: @cell-dimension;
+      font-size: 5em;
+      color: @th-color;
+      text-align: center;
+      margin: 0;
+      line-height: @cell-dimension;
+
+      &.month-switcher:hover {
+        background-color: #DEDEDE;
+        color: #333;
+        cursor: pointer;
+      }
+    }
+  }
+  .days-week th {
+    border: @simple-border;
+    font-size: 1.2em;
+    color: @th-color;
+  }
+  td {
+    border: @simple-border;
+    height: @cell-dimension;
+    width: @cell-dimension;
+    &.enabled {
+      background-color: white;
+
+      &:hover {
+        border-color: rgba(82, 168, 236, 0.8);
+        outline: thin dotted 9;
+        -webkit-box-shadow: @shadow;
+        -moz-box-shadow: @shadow;
+        box-shadow: @shadow;
+        cursor: pointer;
+      }
+    }
+    &.disabled {
+      color: #AAA;
+      background-color: whiteSmoke;
+    }
+  }
+}
+
