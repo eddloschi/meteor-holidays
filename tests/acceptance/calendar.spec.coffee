@@ -10,7 +10,7 @@ describe 'calendar view', ->
   it 'should return 200 ok', ->
     @browser.success.should.equal(true)
 
-  it 'should have a calendar', ->
+  it 'should have a calendar-id div', ->
     should.exist @browser.query('#calendar-id')
 
   it 'should show the present year and month on startup', ->
@@ -19,16 +19,25 @@ describe 'calendar view', ->
     presentYear = @browser.evaluate('moment().format("YYYY")')
     @browser.text('#year-id').should.equal(presentYear)
 
-  it 'should show days of month', ->
+  it 'should show days of the current selected month and have enabled or disabled css class ', ->
     currentDate = @browser.evaluate('Session.get("currentDate")')
     @browser.evaluate("var currentDay = moment('#{currentDate}').startOf('month')")
+    currentMonth = @browser.evaluate("currentDay.month()")
     rows = @browser.evaluate('(currentDay.day() + moment(currentDay).endOf("month").date() <= 35) ? 4 : 5')
     @browser.evaluate('currentDay.subtract("days", currentDay.day())')
     for row in [0..rows]
       for col in [0..6]
         @browser.text("##{row}-#{col}").should.equal("#{@browser.evaluate('currentDay.date()')}")
-        @browser.evaluate('currentDay.add("days", 1)')
 
+        if currentMonth is @browser.evaluate('currentDay.month()')
+          console.log("t")
+          @browser.evaluate("$('##{row}-#{col}').hasClass('enabled')").should.equal(true)
+          @browser.evaluate("$('##{row}-#{col}').hasClass('disabled')").should.equal(false)
+        else
+          @browser.evaluate("$('##{row}-#{col}').hasClass('disabled')").should.equal(true)
+          @browser.evaluate("$('##{row}-#{col}').hasClass('enabled')").should.equal(false)
+
+        @browser.evaluate('currentDay.add("days", 1)')
 
   describe 'user interaction', =>
 

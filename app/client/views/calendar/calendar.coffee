@@ -9,6 +9,7 @@ Template.calendar.weekDays = ->
 
 Template.calendar.monthDays = ->
   currentDay = moment(Session.get('currentDate')).startOf('month')
+  currentMonth = currentDay.month()
   rows = if currentDay.day() + moment(currentDay).endOf('month').date() <= 35 then 4 else 5
   currentDay.subtract('days', currentDay.day())
   days = []
@@ -19,6 +20,8 @@ Template.calendar.monthDays = ->
       days[row].days[col] =
         'day': moment(currentDay).date(),
         'id': "#{row}-#{col}"
+        'class': if currentMonth is currentDay.month() then 'enabled' else 'disabled'
+
       currentDay.add('days', 1)
   days
 
