@@ -20,8 +20,7 @@ describe 'calendar view', ->
     @browser.text('#year-id').should.equal(presentYear)
 
   it 'should show days of the current selected month and have enabled or disabled css class ', ->
-    currentDate = @browser.evaluate('Session.get("currentDate")')
-    @browser.evaluate("var currentDay = moment('#{currentDate}').startOf('month')")
+    @browser.evaluate('var currentDay = moment(Session.get("currentDate")).startOf("month")')
     currentMonth = @browser.evaluate("currentDay.month()")
     rows = @browser.evaluate('(currentDay.day() + moment(currentDay).endOf("month").date() <= 35) ? 4 : 5')
     @browser.evaluate('currentDay.subtract("days", currentDay.day())')
@@ -30,7 +29,6 @@ describe 'calendar view', ->
         @browser.text("##{row}-#{col}").should.equal("#{@browser.evaluate('currentDay.date()')}")
 
         if currentMonth is @browser.evaluate('currentDay.month()')
-          console.log("t")
           @browser.evaluate("$('##{row}-#{col}').hasClass('enabled')").should.equal(true)
           @browser.evaluate("$('##{row}-#{col}').hasClass('disabled')").should.equal(false)
         else
