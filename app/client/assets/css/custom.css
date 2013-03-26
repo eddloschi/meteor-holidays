@@ -14,7 +14,7 @@ body > .content {
 }
 
 .navbar-fixed-top .navbar-inner, .navbar-static-top .navbar-inner  {
-   -webkit-box-shadow: 0 0 ;
+  -webkit-box-shadow: 0 0 ;
   -moz-box-shadow: 0 0 ;
   box-shadow: 0 0 ;
 }
@@ -85,13 +85,14 @@ body > .navbar .brand {
   width: 80px;
 }
 
-#month-view.table tbody td:hover {
+#month-view.table tbody td.enabled:hover {
   border-color: rgba(82, 168, 236, 0.8);
   outline: 0;
   outline: thin dotted 9;
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6);
   -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6);
+  cursor: pointer;
 }
 /* end month-view template */
 
@@ -139,3 +140,9 @@ body > .navbar .brand {
   text-decoration: underline;
 }
 /* end day-view template */
+
+#month-view.table td.disabled {
+  color: #AAA;
+  background-color: whiteSmoke;
+}
+
