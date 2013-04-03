@@ -10,14 +10,15 @@ unit:
 		--ui bdd \
 		unit/*.spec.coffee
 
-acceptance:
+integration:
 	./node_modules/mocha/bin/mocha \
 		--compilers coffee:coffee-script \
+		--globals location \
 		--reporter $(REPORTER) \
 		--timeout $(TIMEOUT) \
 		--ui bdd \
-		acceptance/*.spec.coffee
+		integration/*.spec.coffee
 
-test: unit acceptance
+test: unit integration
 
-.PHONY: unit acceptance
+.PHONY: unit integration
