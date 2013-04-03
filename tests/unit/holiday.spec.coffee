@@ -1,6 +1,5 @@
 phantomCreatePage = require('../helper/specHelper').phantomCreatePage
 chai = require 'chai'
-util = require 'util'
 should = chai.should()
 
 describe 'holiday model', ->
