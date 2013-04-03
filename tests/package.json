@@ -8,5 +8,7 @@
       , "chai": "*"
       , "zombie": "*"
       , "coffee-script": "*"
+      , "node-phantom": "*"
+      , "q": "*"
     }
 }

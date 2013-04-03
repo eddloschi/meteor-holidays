@@ -4,6 +4,7 @@ TIMEOUT ?= 10000
 unit:
 	./node_modules/mocha/bin/mocha \
 		--compilers coffee:coffee-script \
+		--globals location \
 		--reporter $(REPORTER) \
 		--timeout $(TIMEOUT) \
 		--ui bdd \

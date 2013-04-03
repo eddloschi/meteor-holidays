@@ -7,11 +7,3 @@ Holidays.allow
     false
   remove: (userId, doc) ->
     false
-
-if Meteor.isClient
-  Holidays.insert = (userId, doc) ->
-    false
-  Holidays.update = (userId, doc, fields, modifier) ->
-    false
-  Holidays.remove = (userId, doc) ->
-    false
