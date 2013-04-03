@@ -1,7 +1,15 @@
 REPORTER ?= spec
 TIMEOUT ?= 10000
 
-test-acceptance:
+unit:
+	./node_modules/mocha/bin/mocha \
+		--compilers coffee:coffee-script \
+		--reporter $(REPORTER) \
+		--timeout $(TIMEOUT) \
+		--ui bdd \
+		unit/*.spec.coffee
+
+acceptance:
 	./node_modules/mocha/bin/mocha \
 		--compilers coffee:coffee-script \
 		--reporter $(REPORTER) \
@@ -9,10 +17,6 @@ test-acceptance:
 		--ui bdd \
 		acceptance/*.spec.coffee
 
-test-unit:
-	./node_modules/mocha/bin/mocha \
-		--compilers coffee:coffee-script \
-		--reporter $(REPORTER) \
-		--timeout $(TIMEOUT) \
-		--ui bdd \
-		unit/*.spec.coffee
+test: unit acceptance
+
+.PHONY: unit acceptance
