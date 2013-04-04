@@ -15,7 +15,7 @@ describe 'holiday methods', ->
   describe 'createHoliday', =>
 
     it 'should create a holiday with a day and a month', (done) ->
-      name = 'Dia do Trabalho'
+      name = 'Christmas'
       @page.onConsoleMessage = (msg) =>
         @page.evaluate (id) ->
           Holidays.findOne id
@@ -27,7 +27,7 @@ describe 'holiday methods', ->
       @page.evaluate (name) ->
         holiday =
           name: name
-          schedule: recur().on(1).dayOfMonth().on(5).month()
+          schedule: recur().on(25).dayOfMonth().on(12).month()
         Meteor.call 'createHoliday', holiday, (error, result) ->
           console.log result
       , (error, result) ->
