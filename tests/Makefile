@@ -1,5 +1,6 @@
 REPORTER ?= spec
 TIMEOUT ?= 10000
+SPEC ?= *
 
 unit:
 	./node_modules/mocha/bin/mocha \
@@ -8,7 +9,7 @@ unit:
 		--reporter $(REPORTER) \
 		--timeout $(TIMEOUT) \
 		--ui bdd \
-		unit/*.spec.coffee
+		unit/$(SPEC).spec.coffee
 
 integration:
 	./node_modules/mocha/bin/mocha \
@@ -17,7 +18,7 @@ integration:
 		--reporter $(REPORTER) \
 		--timeout $(TIMEOUT) \
 		--ui bdd \
-		integration/*.spec.coffee
+		integration/$(SPEC).spec.coffee
 
 test: unit integration
 
