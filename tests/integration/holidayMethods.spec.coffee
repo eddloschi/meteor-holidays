@@ -12,25 +12,27 @@ describe 'holiday methods', ->
     , (error) ->
       throw error
 
-  it 'should create a holiday with a day and a month', (done) ->
-    name = 'Dia do Trabalho'
-    @page.onConsoleMessage = (msg) =>
-      @page.evaluate (id) ->
-        Holidays.findOne id
+  describe 'createHoliday', =>
+
+    it 'should create a holiday with a day and a month', (done) ->
+      name = 'Dia do Trabalho'
+      @page.onConsoleMessage = (msg) =>
+        @page.evaluate (id) ->
+          Holidays.findOne id
+        , (error, result) ->
+          should.exist result
+          result.name.should.equal name
+          done()
+        , msg
+      @page.evaluate (name) ->
+        holiday =
+          name: name
+          schedule: recur().on(1).dayOfMonth().on(5).month()
+        Meteor.call 'createHoliday', holiday, (error, result) ->
+          console.log result
       , (error, result) ->
-        should.exist result
-        result.name.should.equal name
-        done()
-      , msg
-    @page.evaluate (name) ->
-      holiday =
-        name: name
-        schedule: recur().on(1).dayOfMonth().on(5).month()
-      Meteor.call 'createHoliday', holiday, (error, result) ->
-        console.log result
-    , (error, result) ->
-    ,
-    name
+      ,
+      name
 
   after ->
     @phantom.exit()
